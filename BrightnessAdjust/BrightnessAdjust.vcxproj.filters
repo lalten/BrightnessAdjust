@@ -18,12 +18,18 @@
     <ClInclude Include="ExternalMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InternalMonitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BrightnessAdjust.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExternalMonitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InternalMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

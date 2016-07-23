@@ -1,7 +1,5 @@
 #include "ExternalMonitor.h"
 
-#pragma comment(lib, "Dxva2.lib")
-
 #include <iostream>
 #include <string>
 
@@ -51,6 +49,7 @@ void ExternalMonitor::set_brightness(const int brightness_percent)
 			std::wcerr << "SetMonitorBrightness: " << GetLastErrorAsString() << std::endl;
 		}
 	} while ( !bSuccess && --retry_count );
+	//std::wcerr << "Set " << name << "'s brightness to " << brightness_percent << std::endl;
 }
 
 BOOL CALLBACK ExternalMonitor::MonitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM pData)

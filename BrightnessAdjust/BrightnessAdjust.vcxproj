@@ -43,6 +43,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -145,10 +146,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ExternalMonitor.h" />
+    <ClInclude Include="InternalMonitor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BrightnessAdjust.cpp" />
     <ClCompile Include="ExternalMonitor.cpp" />
+    <ClCompile Include="InternalMonitor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
