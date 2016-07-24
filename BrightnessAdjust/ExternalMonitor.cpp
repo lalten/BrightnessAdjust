@@ -49,7 +49,7 @@ void ExternalMonitor::set_brightness(const int brightness_percent)
 			std::wcerr << "SetMonitorBrightness: " << GetLastErrorAsString() << std::endl;
 		}
 	} while (!bSuccess && --retry_count);
-	std::wcerr << "Set " << name << "'s brightness to " << brightness_percent << std::endl;
+	std::wcout << "Set " << name << "'s brightness to " << brightness_percent << std::endl;
 }
 
 const int ExternalMonitor::get_brightness()
