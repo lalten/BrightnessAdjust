@@ -1,11 +1,11 @@
 // BrightnessAdjust.cpp : Defines the entry point for the console application.
 //
 
-#include <thread>
-
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
 #pragma comment(lib, "Dxva2.lib")
+
+#include <thread>
 
 #include "ExternalMonitor.h"
 #include "InternalMonitor.h"
