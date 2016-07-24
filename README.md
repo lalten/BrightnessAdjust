@@ -1,5 +1,7 @@
 # BrightnessAdjust
 
+![In action](https://i.giphy.com/3oEjHMJaP2QLFFXrOw.gif)
+
 ## Problem
 My external monitor (LG 27MU67-B)  is too bright at night. It doesn't have automatic ambient light adaption and I don't want to adjust it manually all the time.
 
