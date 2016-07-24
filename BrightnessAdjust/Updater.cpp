@@ -40,7 +40,16 @@ Updater::Updater(const std::wstring MONITOR_NAME, const int DIM_STEPS) :
 	{
 		std::unique_lock<std::mutex> lock(mtx);
 
-		internal_brightness = surface.getBrightness();
+		try
+		{
+			internal_brightness = surface.getBrightness();
+		}
+		catch (std::exception ex)
+		{
+			std::cerr << ex.what() << std::endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			continue;
+		}
 
 		if (target_ext_bright != internal_brightness)
 		{

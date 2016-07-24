@@ -28,20 +28,20 @@ const unsigned int InternalMonitor::getBrightness()
 
 	if (!CreatePipe(&g_hChildStd_OUT_Rd, &g_hChildStd_OUT_Wr, &saAttr, 0))
 	{
-		std::cerr << "Could not CreatePipe" << std::endl;
+		throw std::exception("Could not CreatePipe");
 	}
 	if (!SetHandleInformation(g_hChildStd_OUT_Rd, HANDLE_FLAG_INHERIT, 0))
 	{
-		std::cerr << "Could not SetHandleInformation" << std::endl;
+		throw std::exception("Could not SetHandleInformation");
 	}
 
 	if (!CreatePipe(&g_hChildStd_IN_Rd, &g_hChildStd_IN_Wr, &saAttr, 0))
 	{
-		std::cerr << "Could not CreatePipe" << std::endl;
+		throw std::exception("Could not CreatePipe");
 	}
 	if (!SetHandleInformation(g_hChildStd_IN_Wr, HANDLE_FLAG_INHERIT, 0))
 	{
-		std::cerr << "Could not SetHandleInformation" << std::endl;
+		throw std::exception("Could not SetHandleInformation");
 	}
 
 	STARTUPINFO si;
@@ -69,7 +69,7 @@ const unsigned int InternalMonitor::getBrightness()
 
 	if (!result)
 	{
-		std::cerr << "Could not CreateProcess" << std::endl;
+		throw std::exception("Could not CreateProcess");
 	}
 
 	CloseHandle(pi.hProcess);
@@ -80,9 +80,12 @@ const unsigned int InternalMonitor::getBrightness()
 
 	DWORD dwRead;
 	CHAR chBuf[256];
-	BOOL bSuccess = FALSE;
 	HANDLE hParentStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	bSuccess = ReadFile(g_hChildStd_OUT_Rd, chBuf, 256, &dwRead, NULL);
 	
+	if (!ReadFile(g_hChildStd_OUT_Rd, chBuf, 256, &dwRead, NULL))
+	{
+		throw std::exception("Could not ReadFile");
+	}
+
 	return std::stoi( std::string(chBuf) );
 }
