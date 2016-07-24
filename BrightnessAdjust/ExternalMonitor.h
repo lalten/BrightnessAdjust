@@ -11,6 +11,8 @@ public:
 
 	void set_brightness(const int brightness_percent);
 
+	const int get_brightness();
+
 private:
 	ExternalMonitor();
 

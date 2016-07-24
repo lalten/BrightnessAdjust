@@ -48,8 +48,29 @@ void ExternalMonitor::set_brightness(const int brightness_percent)
 		{
 			std::wcerr << "SetMonitorBrightness: " << GetLastErrorAsString() << std::endl;
 		}
-	} while ( !bSuccess && --retry_count );
-	//std::wcerr << "Set " << name << "'s brightness to " << brightness_percent << std::endl;
+	} while (!bSuccess && --retry_count);
+	std::wcerr << "Set " << name << "'s brightness to " << brightness_percent << std::endl;
+}
+
+const int ExternalMonitor::get_brightness()
+{
+	DWORD pdwMinimumBrightness;
+	DWORD pdwCurrentBrightness;
+	DWORD pdwMaximumBrightness;
+	BOOL bSuccess;
+	int retry_count = 10;
+	do {
+		bSuccess = GetMonitorBrightness(hPhysicalMonitor, &pdwMinimumBrightness, &pdwCurrentBrightness, &pdwMaximumBrightness);
+		if (bSuccess == FALSE)
+		{
+			std::wcerr << "SetMonitorBrightness: " << GetLastErrorAsString() << std::endl;
+		}
+	} while (!bSuccess && --retry_count);
+
+	double normalized_brightness = 100 * (pdwCurrentBrightness - pdwMinimumBrightness) / (pdwMaximumBrightness - pdwMinimumBrightness);
+	std::wcout << "Got " << name << "'s brightness as " << normalized_brightness << std::endl;
+
+	return static_cast<int>(std::round(normalized_brightness));
 }
 
 BOOL CALLBACK ExternalMonitor::MonitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM pData)

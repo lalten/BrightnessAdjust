@@ -16,17 +16,21 @@ int main()
 	ExternalMonitor lg(MONITOR_NAME);
 	InternalMonitor surface;
 
-	int brightness;
-	int last_brightness = -1;
+	int internal_brightness;
+
+	lg.set_brightness(0);
+	int external_brightness = 0; // lg.get_brightness();
+
 	while (true)
 	{
-		brightness = surface.getBrightness();
-		if (last_brightness != brightness)
+		internal_brightness = surface.getBrightness();
+		while (external_brightness != internal_brightness)
 		{
-			last_brightness = brightness;
-			lg.set_brightness(brightness);
+			external_brightness = external_brightness < internal_brightness ? external_brightness+1 : external_brightness-1;
+			lg.set_brightness(external_brightness);
+			//std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 
 	return 0;
