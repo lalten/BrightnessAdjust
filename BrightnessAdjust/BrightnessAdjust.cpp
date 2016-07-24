@@ -3,6 +3,8 @@
 
 #include <thread>
 
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+
 #pragma comment(lib, "Dxva2.lib")
 
 #include "ExternalMonitor.h"
@@ -16,10 +18,10 @@ int main()
 	ExternalMonitor lg(MONITOR_NAME);
 	InternalMonitor surface;
 
-	int internal_brightness;
+	int internal_brightness = surface.getBrightness();
+	int external_brightness = internal_brightness;
 
-	lg.set_brightness(0);
-	int external_brightness = 0; // lg.get_brightness();
+	lg.set_brightness(external_brightness);
 
 	while (true)
 	{

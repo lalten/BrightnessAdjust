@@ -10,6 +10,5 @@ public:
 
 	const unsigned int getBrightness();
 private:
-	static const std::string exec(const char* cmd);
 };
 
